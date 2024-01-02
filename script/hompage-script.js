@@ -63,16 +63,14 @@ $(document).ready(function () {
   autoReload();
 });
 
-
 //checking for the valid url see line 95
 function isValidUrl(url) {
   // Regular expression for a simple URL validation
-  const urlPattern = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-  
+  const urlPattern =
+    /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
 
   return urlPattern.test(url);
 }
-
 
 // Function to handle form submission
 function submitForm() {
@@ -95,7 +93,12 @@ function submitForm() {
   });
 
   // if (isEmpty || jobStageValue === "default" || jobTypeValue === "default" || !isValidUrl(positionValue)) {
-  if (isEmpty || jobStageValue === "default" || jobTypeValue === "default" || !isValidUrl(postingValue)) {
+  if (
+    isEmpty ||
+    jobStageValue === "default" ||
+    jobTypeValue === "default" ||
+    !isValidUrl(postingValue)
+  ) {
     $("#myModal").modal("show");
     closeBtn();
   } else {
@@ -248,10 +251,21 @@ function displayOnPage() {
   // $("#job-type-title").text("JobType: " + userInputArray[lastIndex].jobType);
 }
 
-$(document).ready(function () {
-  // Add event listener to the button Start Journey to link index file to the home page
-  $("#btn-dashboard").on("click", function () {
-    // Redirect the user to the 'homepage.html' page
-    window.location.pathname = "/dashboard.html";
-  });
+// Add event listener to dashboard button to redirect to dashboard
+let dashboardButton = $("#btn-dashboard");
+console.log(dashboardButton);
+console.log('click to go to homepage');
+
+dashboardButton.on("click", function () {
+  // Redirect the user to the 'dashboard.html' page
+  if (window.location.hostname === "yuzbamaria.github.io") {
+    // Redirect to the GitHub Pages URL
+    window.location.href =
+      // "https://yuzbamaria.github.io/job_search_tracker/dashboard.html";
+      "https://stevecalla.github.io/job_search_tracker/dashboard.html";
+  } else {
+    // Redirect to the local development URL
+    window.location.href =
+      "http://127.0.0.1:5501/job_search_tracker/dashboard.html";
+  }
 });
