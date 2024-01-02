@@ -253,8 +253,9 @@ function displayOnPage() {
 
 // Add event listener to dashboard button to redirect to dashboard
 let dashboardButton = $("#btn-dashboard");
+
 console.log(dashboardButton);
-console.log('click to go to homepage');
+console.log('click to go to dashboard');
 
 dashboardButton.on("click", function () {
   // Redirect the user to the 'dashboard.html' page
