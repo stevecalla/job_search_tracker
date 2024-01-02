@@ -260,11 +260,13 @@ dashboardButton.on("click", function () {
   // Redirect the user to the 'dashboard.html' page
   if (window.location.hostname === "yuzbamaria.github.io") {
     // Redirect to the GitHub Pages URL
+    location.href = "./dashboard.html"
     window.location.href =
       // "https://yuzbamaria.github.io/job_search_tracker/dashboard.html";
       "https://stevecalla.github.io/job_search_tracker/dashboard.html";
   } else {
     // Redirect to the local development URL
+    location.href = "./dashboard.html"
     window.location.href =
       "http://127.0.0.1:5501/job_search_tracker/dashboard.html";
   }
