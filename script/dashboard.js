@@ -196,37 +196,66 @@ $(document).ready(function() {
      $("#jobTypeFilterBtn").on("change", function() {
         // Get the selected job type
         const selectedJobType = $(this).val();
+        const selectedJobStage = $('#jobStageFilterBtn').val(); //fix added
         // Filter cards based on the selected job type
-        filterCards("jobType", selectedJobType);
+        // filterCards("jobType", selectedJobType);
+        filterCards(selectedJobType, selectedJobStage); //fix adjusted prior line
     });
     // Event listener for job stage filter button
     $("#jobStageFilterBtn").on("change", function() {
         // Get the selected job type
         const selectedJobStage = $(this).val();
+        const selectedJobType = $('#jobTypeFilterBtn').val(); //fix added
         // Filter cards based on the selected job type
-        filterCards("jobStage", selectedJobStage);
+        // filterCards("jobStage", selectedJobStage);
+        filterCards(selectedJobType, selectedJobStage); //fix adjusted prior line
     });
     // Function to filter cards based on the specified data attribute and value
-    function filterCards(jobType, jobStage) {
+    function filterCards(jobType = "default", jobStage = "default") {
         console.log("Filtering cards - Job Type:", jobType, "Job Stage:", jobStage);
         // Iterate over each cardContainer element using jQuery
         $(".cardContainer").each(function() {
             // Retrieve the jobType and jobStage values from the current cardContainer
+
+            console.log($(this).data);
+
             const cardJobType = $(this).data("jobType");
             const cardJobStage = $(this).data("jobStage");
+
             console.log("Card Job Type:", cardJobType, "Card Job Stage:", cardJobStage);
-            // check if the jobType is either "default" or matches the cardJobType
-            const isJobTypeMatch = jobType === "default" || cardJobType === jobType;
-            // Check if the jobStage is either "default" or matches the cardJobStage
-            const isJobStageMatch = jobStage === "default" || cardJobStage === jobStage;
-            // Check if either jobType or jobStage is selected, and if the matches are found
-            if ((jobType && isJobTypeMatch) || (jobStage && isJobStageMatch)) {
-                console.log("Showing card");
-                $(this).show();
-            } else {
-                console.log("Hiding card");
-                $(this).hide();
+
+            // // check if the jobType is either "default" or matches the cardJobType
+            // const isJobTypeMatch = jobType === "default" || cardJobType === jobType;
+            // // Check if the jobStage is either "default" or matches the cardJobStage
+            // const isJobStageMatch = jobStage === "default" || cardJobStage === jobStage;
+            // // Check if either jobType or jobStage is selected, and if the matches are found
+
+            // if ((jobType && isJobTypeMatch) || (jobStage && isJobStageMatch)) {
+            //     console.log("Showing card");
+            //     $(this).show();
+            // } else {
+            //     console.log("Hiding card");
+            //     $(this).hide();
+            // }
+
+            //fix start
+            console.log(cardJobStage, jobStage);
+            console.log(cardJobType, jobType);
+            console.log(jobStage === "default", jobType === "default")
+
+            if (jobStage === "default" && jobType === "default") {
+              console.log("default")
+              $(this).show();
+            } else if (cardJobStage === jobStage && cardJobType === jobType) {
+              $(this).show();
+            } 
+            else if (cardJobStage === jobStage || cardJobType === jobType) {
+              $(this).show();
+            } 
+            else {
+              $(this).hide();
             }
+            //fix end
         });
     }
     // Event listener for job type filter dropdown
